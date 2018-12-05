@@ -1,18 +1,14 @@
-// Import { Member name } from 'path to member'
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-// Metadata
 @Component({
-  // the name of the 'Directive' (custom HTML tag) to place the component  
   selector: 'pm-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template:`
+  <div><h1>{{pageTitle}}</h1>
+      <pm-products></pm-products>
+  <div>
+  `
 })
 
-// Class
-// Naming convention 'FeatureName' suffixed with 'Component'
-// conventional name for root application component is 'AppComponent'
 export class AppComponent {
-  // Property 
-  title = 'Angular: Getting Started';
+  pageTitle: string = 'Acme Product Management';
 }
