@@ -1,9 +1,15 @@
+// imprt from libraries, app modules or Angular
 import { Component } from "@angular/core";
 
+// '@Component' Decorator to make the class a Component and define Metadata 
+// selector = custom html tag to be placed in html 
+// templateUrl = the html template to be rendered within the selector. 
 @Component({
    selector: 'pm-products',
    templateUrl: './product-list.component.html'
 })
+
+// 'export' in class signature to make code available to other classes
 export class ProductListComponent {
    pageTitle: string = 'Product - List';
    imageWidth: number = 50;
