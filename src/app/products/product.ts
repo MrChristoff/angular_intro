@@ -26,7 +26,7 @@ export class Product implements IProduct {
 
     }
 
-    clalculateDiscount(percent: number): number {
+    calculateDiscount(percent: number): number {
         return this.price - (this.price * percent / 100);
     }
 

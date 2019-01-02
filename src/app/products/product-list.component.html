@@ -44,7 +44,7 @@
                      [style.margin.px]='imageMargin'>
                   </td>
                  <td>{{ product.productName  }}</td>
-                 <td>{{ product.productCode | lowercase  }}</td>
+                 <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
                  <td>{{ product.releaseDate  }}</td>
                  <!-- pipe to transform data into pounds and minimum digits -->
                  <td>{{ product.price       |  currency:'GBP':'symbol':'1.2-2' }}</td>

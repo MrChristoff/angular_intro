@@ -1,17 +1,20 @@
 // imprt from libraries, app modules or Angular
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { IProduct } from "./product";
 
 // '@Component' Decorator to make the class a Component and define Metadata 
 // selector = custom html tag to be placed in html 
 // templateUrl = the html template to be rendered within the selector. 
+// styleUrls = link(s) to style sheet
 @Component({
    selector: 'pm-products',
-   templateUrl: './product-list.component.html'
+   templateUrl: './product-list.component.html',
+   styleUrls: ['./product-list.component.css']
 })
 
 // 'export' in class signature to make code available to other classes
-export class ProductListComponent {
+// 'implements' in class signature to implement the Angular 'OnInit' interface
+export class ProductListComponent implements OnInit{
    pageTitle: string = 'Product - List';
    imageWidth: number = 50;
    imageMargin: number = 2;
@@ -42,5 +45,9 @@ export class ProductListComponent {
 
    toggleImage(): void {
       this.showImage = !this.showImage;
+   }
+
+   ngOnInit(): void{
+      console.log('In OnInit');
    }
 }
