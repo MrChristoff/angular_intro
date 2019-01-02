@@ -16,10 +16,20 @@ import { IProduct } from "./product";
 // 'implements' in class signature to implement the Angular 'OnInit' interface
 export class ProductListComponent implements OnInit{
    pageTitle: string = 'Product - List';
-   imageWidth: number = 50;
+   imageWidth: number = 70;
    imageMargin: number = 2;
-   showImage: boolean = false;
-   listFilter: string = 'cart';
+   showImage: boolean = true;
+   
+   _listFilter: string;
+   public get listFilter() : string {
+      return this._listFilter
+   }
+   public set listFilter(value : string) {
+      this._listFilter = value;
+      this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+   }
+   
+   filteredProducts: IProduct[];
    products: IProduct[] = [
       {
          "productId": 2,
@@ -29,7 +39,7 @@ export class ProductListComponent implements OnInit{
          "description": "15 gallon capacity rolling garden cart",
          "price": 32.99,
          "starRating": 4.2,
-         "imageUrl": "https://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
+         "imageUrl": "https://openclipart.org/image/400px/svg_to_png/179460/spitfire.png"
        },
        {
          "productId": 5,
@@ -39,9 +49,20 @@ export class ProductListComponent implements OnInit{
          "description": "Curved claw steel hammer",
          "price": 8.9,
          "starRating": 4.8,
-         "imageUrl": "https://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
+         "imageUrl": "https://openclipart.org/image/300px/svg_to_png/235877/Avro-Lancaster.png"
        }
    ];
+
+   constructor()  {
+      this.filteredProducts = this.products;
+      this.listFilter = 'cart';
+   }
+
+   performFilter(filterBy: string): IProduct[] {
+      filterBy = filterBy.toLowerCase();
+      return this.products.filter((product: IProduct) => 
+         product.productName.toLowerCase().indexOf(filterBy) !== -1)
+   }
 
    toggleImage(): void {
       this.showImage = !this.showImage;

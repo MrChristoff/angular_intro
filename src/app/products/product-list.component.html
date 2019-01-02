@@ -34,7 +34,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor='let product of products'>
+              <!-- one way binding object => dom -->
+              <tr *ngFor='let product of filteredProducts'>
                  <td>
                      <!-- one way binding object => dom -->
                     <img *ngIf='showImage'
