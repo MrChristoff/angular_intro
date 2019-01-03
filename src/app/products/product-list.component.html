@@ -50,7 +50,11 @@
                  <td>{{ product.releaseDate  }}</td>
                  <!-- pipe to transform data into pounds and minimum digits -->
                  <td>{{ product.price       |  currency:'GBP':'symbol':'1.2-2' }}</td>
-                 <td>{{ product.starRating   }}</td>
+                 <td>
+                   <pm-star [rating]='product.starRating'
+                   (ratingClicked)='onRatingClicked($event)'>
+                   </pm-star>
+                  </td>
               </tr>
             </tbody>
           </table>
