@@ -45,12 +45,13 @@
                      [style.margin.px]='imageMargin'>
                   </td>
                  <td>{{ product.productName  }}</td>
-                 <!-- convertToSpaces is a custome pipe, file is in 'shared' folder. imported and declared in the app.module.ts -->
+                 <!-- convertToSpaces is a custom pipe, file is in 'shared' folder. imported and declared in the app.module.ts -->
                  <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
                  <td>{{ product.releaseDate  }}</td>
                  <!-- pipe to transform data into pounds and minimum digits -->
                  <td>{{ product.price       |  currency:'GBP':'symbol':'1.2-2' }}</td>
                  <td>
+                   <!-- nested component with an emitted event -->
                    <pm-star [rating]='product.starRating'
                    (ratingClicked)='onRatingClicked($event)'>
                    </pm-star>
