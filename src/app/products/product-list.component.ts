@@ -8,7 +8,7 @@ import { ProductService } from './product.service';
 // templateUrl = the html template to be rendered within the selector. 
 // styleUrls = link(s) to style sheet - encapsulated in this component
 @Component({
-   selector: 'pm-products',
+   //selector: 'pm-products',
    templateUrl: './product-list.component.html',
    styleUrls: ['./product-list.component.css']
 })
