@@ -1,6 +1,7 @@
 // imprt from libraries, app modules or Angular
 import { Component, OnInit } from "@angular/core";
 import { IProduct } from "./product";
+import { ProductService } from './product.service';
 
 // '@Component' Decorator to make the class a Component and define Metadata 
 // selector = custom html tag to be placed in html 
@@ -19,6 +20,7 @@ export class ProductListComponent implements OnInit{
    imageWidth: number = 70;
    imageMargin: number = 2;
    showImage: boolean = true;
+   private _productService;
    
    /* 
      the _listFilter propery has getter/setter so when the two way data binding requests the data it accesses the getter,
@@ -35,50 +37,40 @@ export class ProductListComponent implements OnInit{
    }
    
    filteredProducts: IProduct[];
-   products: IProduct[] = [
-      {
-         "productId": 2,
-         "productName": "Garden Cart",
-         "productCode": "GDN-0023",
-         "releaseDate": "March 18, 2016",
-         "description": "15 gallon capacity rolling garden cart",
-         "price": 32.99,
-         "starRating": 4.2,
-         "imageUrl": "https://openclipart.org/image/400px/svg_to_png/179460/spitfire.png"
-       },
-       {
-         "productId": 5,
-         "productName": "Hammer",
-         "productCode": "TBX-0048",
-         "releaseDate": "May 21, 2016",
-         "description": "Curved claw steel hammer",
-         "price": 8.9,
-         "starRating": 4.8,
-         "imageUrl": "https://openclipart.org/image/300px/svg_to_png/235877/Avro-Lancaster.png"
-       }
-   ];
+   products: IProduct[] = [];
 
-   constructor()  {
-      this.filteredProducts = this.products;
-      this.listFilter = 'cart';
+   /*
+
+   Uncommented constructor is syntactic sugar for this commented constructer.
+
+   constructor(productService: ProductService)  {
+     this._productService = productService;
+   }  
+
+   */
+
+   // DI a service
+   constructor(private productService: ProductService)  {
    }
-
+   
+   // this function is called, with the param supplied via the nested components emitter (@Output), in the view template 
    onRatingClicked(message: string): void {
-      this.pageTitle = 'Product - List ' + message;
+      this.pageTitle = 'Product - List' + message;
    }
-
+   
    performFilter(filterBy: string): IProduct[] {
       filterBy = filterBy.toLowerCase();
       return this.products.filter((product: IProduct) => 
-         product.productName.toLowerCase().indexOf(filterBy) !== -1)
+      product.productName.toLowerCase().indexOf(filterBy) !== -1)
    }
-
+   
    toggleImage(): void {
       this.showImage = !this.showImage;
    }
    // Lifecycle hook, interface imported from Angular and implemented here  
    // https://angular.io/guide/lifecycle-hooks
    ngOnInit(): void{
-      console.log('In OnInit');
+      this.products = this.productService.getProducts();
+      this.filteredProducts = this.products;
    }
 }
