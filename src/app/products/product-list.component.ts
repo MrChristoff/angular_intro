@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit{
    imageWidth: number = 70;
    imageMargin: number = 2;
    showImage: boolean = true;
-   private _productService;
+   errorMessage: string;
    
    /* 
      the _listFilter propery has getter/setter so when the two way data binding requests the data it accesses the getter,
@@ -40,13 +40,12 @@ export class ProductListComponent implements OnInit{
    products: IProduct[] = [];
 
    /*
-
    Uncommented constructor is syntactic sugar for this commented constructer.
 
+   private _productService;
    constructor(productService: ProductService)  {
      this._productService = productService;
    }  
-
    */
 
    // DI a service
@@ -70,7 +69,13 @@ export class ProductListComponent implements OnInit{
    // Lifecycle hook, interface imported from Angular and implemented here  
    // https://angular.io/guide/lifecycle-hooks
    ngOnInit(): void{
-      this.products = this.productService.getProducts();
-      this.filteredProducts = this.products;
+      // this.products = this.productService.getProducts();
+      this.productService.getProducts().subscribe(
+         products => {
+            this.products = products;
+            this.filteredProducts = this.products;
+         },
+         error => this.errorMessage = <any>error
+      );
    }
 }
